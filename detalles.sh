@@ -2,6 +2,9 @@
 
 # Información general del sistema, los usuarios, las IPs/MACs y uso del home.
 
+LANGUAGE=$1
+
+if [[ "$LANGUAGE" == "es" ]]; then
 timestamp=$(date '+%Y-%m-%d_%H-%M-%S')
 outfile="reporte_sistema_$timestamp.txt"
 
@@ -60,3 +63,66 @@ echo -e "\n✅ Fin del reporte"
 } | tee "$outfile"
 
 echo -e "\n📄 Reporte guardado en: $(pwd)/$outfile"
+
+else
+# General system info: users, IPs/MACs, and home directory usage.
+
+timestamp=$(date '+%Y-%m-%d_%H-%M-%S')
+outfile="system_report_$timestamp.txt"
+
+{
+echo "📋 SYSTEM INFORMATION - $(date '+%Y-%m-%d %H:%M:%S')"
+echo "---------------------------------------------------------"
+
+# System information
+echo -e "\n🖥️  HOSTNAME: $(hostname)"
+echo "🧠 CPU: $(lscpu | grep 'Model name' | sed 's/Model name:[ \t]*//')"
+echo "💾 Total RAM: $(free -h | awk '/Mem:/ {print $2}')"
+echo "💽 Total Disk: $(df -h --total | grep total | awk '{print $2}')"
+echo "🖥️ OS: $(lsb_release -d | cut -f2)"
+echo "🧮 Kernel: $(uname -r)"
+
+# IP and Network
+echo -e "\n🌐 NETWORK (IP + MAC)"
+for iface in $(ip -o -4 addr show | awk '{print $2}'); do
+  ip_addr=$(ip -o -4 addr show $iface | awk '{print $4}')
+  mac_addr=$(ip link show $iface | awk '/link\/ether/ {print $2}')
+  echo "$iface → IP: $ip_addr | MAC: $mac_addr"
+done
+
+# Uptime
+echo -e "\n⏳ System uptime:"
+uptime -p
+
+# Logged-in users
+echo -e "\n👥 Logged-in users:"
+who
+
+# Network devices (ARP)
+echo -e "\n📡 Detected network devices (ARP):"
+ip neigh | grep -i "lladdr" | awk '{printf "IP: %-16s MAC: %s\n", $1, $5}'
+
+# Active processes
+echo -e "\n🔍 Active processes: $(ps aux --no-heading | wc -l)"
+
+# Disk space
+echo -e "\n📂 Disk space usage (excluding tmpfs):"
+df -h | grep -v tmpfs
+
+# Current directory
+echo -e "\n📌 Current directory (pwd):"
+pwd
+
+# Files sorted by size
+echo -e "\n🗃️ Files in current directory sorted by size:"
+ls -lSh
+
+# Home directory usage
+echo -e "\n🏠 Total usage of $HOME directory:"
+du -sh ~
+
+echo -e "\n✅ End of report"
+} | tee "$outfile"
+
+echo -e "\n📄 Report saved in: $(pwd)/$outfile"
+fi
