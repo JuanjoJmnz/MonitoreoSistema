@@ -3,6 +3,9 @@
 # Información general del sistema, los usuarios, las IPs/MACs y uso del home.
 
 LANGUAGE=$1
+LANGUAGE=$(echo "$LANGUAGE" | tr '[:upper:]' '[:lower:]')
+FORMAT=$2
+FORMAT=$(echo "$FORMAT" | tr '[:upper:]' '[:lower:]')
 
 if [[ "$LANGUAGE" == "es" ]]; then
 timestamp=$(date '+%Y-%m-%d_%H-%M-%S')
@@ -63,6 +66,21 @@ echo -e "\n✅ Fin del reporte"
 } | tee "$outfile"
 
 echo -e "\n📄 Reporte guardado en: $(pwd)/$outfile"
+
+# Generar HTML o PDF si se indica
+if [[ "$FORMAT" == "html" ]]; then
+    htmlfile="${outfile%.txt}.html"
+    echo "<pre>" > "$htmlfile"
+    cat "$outfile" >> "$htmlfile"
+    echo "</pre>" >> "$htmlfile"
+    echo "🌐 Reporte también exportado a: $(pwd)/$htmlfile"
+elif [[ "$FORMAT" == "pdf" ]]; then
+    psfile="${outfile%.txt}.ps"
+    pdffile="${outfile%.txt}.pdf"
+    enscript "$outfile" -o "$psfile" && ps2pdf "$psfile" "$pdffile" && rm "$psfile"
+    echo "📄 Reporte también exportado a: $(pwd)/$pdffile"
+fi
+
 
 else
 # General system info: users, IPs/MACs, and home directory usage.
@@ -125,4 +143,18 @@ echo -e "\n✅ End of report"
 } | tee "$outfile"
 
 echo -e "\n📄 Report saved in: $(pwd)/$outfile"
+
+# Export to HTML or PDF if specified
+if [[ "$FORMAT" == "html" ]]; then
+    htmlfile="${outfile%.txt}.html"
+    echo "<pre>" > "$htmlfile"
+    cat "$outfile" >> "$htmlfile"
+    echo "</pre>" >> "$htmlfile"
+    echo "🌐 Report also exported to: $(pwd)/$htmlfile"
+elif [[ "$FORMAT" == "pdf" ]]; then
+    psfile="${outfile%.txt}.ps"
+    pdffile="${outfile%.txt}.pdf"
+    enscript "$outfile" -o "$psfile" && ps2pdf "$psfile" "$pdffile" && rm "$psfile"
+    echo "📄 Report also exported to: $(pwd)/$pdffile"
+fi
 fi
