@@ -6,6 +6,8 @@
 
 <h3 align="center">Monitor y Diagnóstico del Sistema (Bash)</h3>
 
+📘 También disponible en: [English](README.en.md)
+
   <p align="center">
     Scripts en Bash para monitorear y diagnosticar el estado de un sistema Linux.
     <br />
