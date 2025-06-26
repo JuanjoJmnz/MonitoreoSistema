@@ -78,7 +78,7 @@ Ideal para auditorías rápidas, soporte técnico o revisión de rendimiento.
 
 - [ ] Añadir opción para exportar reporte a PDF o HTML
 - [ ] Añadir opción de envío automático por email
-- [ ] Crear versión en inglés
+- [x] Crear versión en inglés
 - [ ] Soporte para alertas sonoras en modo monitor
 - [ ] Empaquetado como herramienta CLI instalable
 
