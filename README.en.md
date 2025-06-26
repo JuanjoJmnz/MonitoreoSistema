@@ -85,7 +85,7 @@ Ideal for quick audits, tech support, or performance reviews.
 
 ## 🗺️ Roadmap
 
-- [ ] Add option to export report to PDF or HTML
+- [x] <s>Add option to export report to PDF or HTML</s>
 - [ ] Add automatic email sending feature
 - [x] <s>Create English version</s>
 - [ ] Add sound alerts support in monitor mode
