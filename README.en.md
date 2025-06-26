@@ -76,7 +76,7 @@ Ideal for quick audits, tech support, or performance reviews.
 
 - [ ] Add option to export report to PDF or HTML
 - [ ] Add automatic email sending feature
-- [ ] Create English version
+- [x] <s>Create English version</s>
 - [ ] Add sound alerts support in monitor mode
 - [ ] Package as an installable CLI tool
 
