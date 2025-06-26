@@ -46,6 +46,11 @@ Bash 4+
 Permisos de ejecución en terminal
 ```
 
+#### Instalar GhostScript
+```sh
+sudo apt install enscript ghostscript
+```
+
 ### Instalación
 
 Clona el repositorio:
