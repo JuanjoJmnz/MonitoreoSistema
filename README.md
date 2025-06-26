@@ -9,7 +9,7 @@
 📘 También disponible en: [English](README.en.md)
 
   <p align="center">
-    Scripts en Bash para monitorear y diagnosticar el estado de un sistema Linux.
+    Scripts en Bash para monitorear y diagnosticar el estado de un sistema Linux. Devuelve el resultado en un archivo de texto plano, un archivo HTML o un archivo PDF. También puede usarse en inglés o español.
     <br />
     <a href="https://github.com/JuanjoJmnz/MonitoreoSistema/issues">Reportar Error</a>
     ·
@@ -59,8 +59,14 @@ chmod +x detalles.sh monitoreo.sh
 Ejecuta los scripts:
 
 ```sh
-./detalles.sh           # Para generar un reporte completo del sistema
-./monitoreo.sh          # Para iniciar el monitor en tiempo real
+./detalles.sh es pdf	  # Reporte en español + exportar a PDF
+./detalles.sh es html	  # Reporte en español + exportar a HTML
+./detalles.sh en pdf	  # Reporte en inglés + exportar a PDF
+./detalles.sh en html	  # Reporte en inglés + exportar a HTML
+
+./monitoreo.sh es       # Para iniciar el monitor en tiempo real en español
+./monitoreo.sh en       # Para iniciar el monitor en tiempo real en inglés
+./monitoreo.sh          # Para iniciar el monitor en tiempo real en inglés (por defecto)
 ```
 
 ---
