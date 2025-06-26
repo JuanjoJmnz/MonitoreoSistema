@@ -7,7 +7,7 @@
 <h3 align="center">System Monitoring and Diagnostics (Bash)</h3>
 
   <p align="center">
-    Bash scripts to monitor and diagnose the status of a Linux system.
+    Bash scripts to monitor and diagnose the status of a Linux system. Outputs the results to a plain text file, an HTML file, or a PDF file. Can also be used in English or Spanish.
     <br />
     <a href="https://github.com/JuanjoJmnz/MonitoreoSistema/issues">Report Bug</a>
     ·
@@ -44,6 +44,11 @@ Bash 4+
 Execution permissions in terminal
 ```
 
+#### Install GhostScript
+```sh
+sudo apt install enscript ghostscript
+```
+
 ### Installation
 
 Clone the repository:
@@ -57,8 +62,14 @@ chmod +x detalles.sh monitoreo.sh
 Run the scripts:
 
 ```sh
-./detalles.sh           # To generate a full system report
-./monitoreo.sh          # To start the real-time monitor
+./detalles.sh es pdf    # Report in Spanish + export to PDF
+./detalles.sh es html   # Report in Spanish + export to HTML
+./detalles.sh en pdf    # Report in English + export to PDF
+./detalles.sh en html   # Report in English + export to HTML
+
+./monitoreo.sh es       # Start real-time monitor in Spanish
+./monitoreo.sh en       # Start real-time monitor in English
+./monitoreo.sh          # Start real-time monitor in English (default)
 ```
 
 ---
